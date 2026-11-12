@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ClaimPro - Insurance Claim Processing and Management System">
+    <title>ClaimPro | Claim Processing System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+            <div>
+                <h2>ClaimPro</h2>
+                <span>Insurance Management</span>
+            </div>
+        </div>
+
+        <div class="sidebar-label">MAIN MENU</div>
+
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#file-claim" class="nav-link" data-page="file-claim">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                <span>File a Claim</span>
+            </a>
+
+            <a href="#claims" class="nav-link" data-page="claims">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Claims</span>
+            </a>
+
+            <a href="#review" class="nav-link" data-page="review">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <span>Claim Review</span>
+            </a>
+
+            <a href="#settlement" class="nav-link" data-page="settlement">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Settlement</span>
+            </a>
+
+            <a href="#documents" class="nav-link" data-page="documents">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Documents</span>
+            </a>
+
+            <a href="#reports" class="nav-link" data-page="reports">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-label">ACCOUNT</div>
+
+            <a href="#profile" class="nav-link" data-page="profile">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="#login" class="nav-link" data-page="login" id="loginNav">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+
+            <button class="nav-link logout-link" id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+                <strong>ClaimPro Secure</strong>
+                <span>Claim management portal</span>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- Main Area -->
+    <main class="main-content">
+
+        <!-- Top Navigation -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+                <button class="icon-button menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div>
+                    <h3 id="pageTitle">Dashboard</h3>
+                    <p id="pageSubtitle">Welcome back! Here's your claims overview.</p>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="icon-button" id="themeToggle" title="Toggle dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button class="icon-button notification-button" id="notificationBtn" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">AD</div>
+                    <div class="user-info">
+                        <strong id="topUserName">Admin User</strong>
+                        <span id="topUserRole">Administrator</span>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="content-wrapper">
+
+            <!-- Dashboard -->
+            <section class="page-section active" id="dashboard">
+
+                <div class="welcome-banner">
+                    <div>
+                        <span class="welcome-label">CLAIM MANAGEMENT OVERVIEW</span>
+                        <h1>Welcome to ClaimPro 👋</h1>
+                        <p>Monitor, manage and process insurance claims efficiently.</p>
+                    </div>
+
+                    <button class="primary-button" data-go="file-claim">
+                        <i class="fa-solid fa-plus"></i>
+                        New Claim
+                    </button>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Dashboard Overview</h2>
+                        <p>Here's what's happening with your claims.</p>
+                    </div>
+                    <span class="date-label" id="dashboardDate"></span>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon purple">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <span class="stat-trend">Total</span>
+                        </div>
+                        <h2 id="totalClaims">0</h2>
+                        <p>Total Claims</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon blue">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <span class="stat-trend">In progress</span>
+                        </div>
+                        <h2 id="pendingClaims">0</h2>
+                        <p>Pending Claims</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon green">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <span class="stat-trend">Successful</span>
+                        </div>
+                        <h2 id="approvedClaims">0</h2>
+                        <p>Approved Claims</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon orange">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+                            <span class="stat-trend">Processed</span>
+                        </div>
+                        <h2 id="totalSettlement">₹0</h2>
+                        <p>Total Settlements</p>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-grid">
+
+                    <div class="panel chart-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Claims Overview</h3>
+                                <p>Distribution of claim statuses</p>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="claimsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Claim Statuses</h3>
+                                <p>Current claim distribution</p>
+                            </div>
+                        </div>
+
+                        <div class="status-summary">
+                            <div class="status-summary-item">
+                                <span class="status-dot filed-dot"></span>
+                                <span>Filed</span>
+                                <strong id="filedCount">0</strong>
+                            </div>
+
+                            <div class="status-summary-item">
+                                <span class="status-dot review-dot"></span>
+                                <span>Under Review</span>
+                                <strong id="reviewCount">0</strong>
+                            </div>
+
+                            <div class="status-summary-item">
+                                <span class="status-dot pending-dot"></span>
+                                <span>Pending</span>
+                                <strong id="pendingCount">0</strong>
+                            </div>
+
+                            <div class="status-summary-item">
+                                <span class="status-dot approved-dot"></span>
+                                <span>Approved</span>
+                                <strong id="approvedCount">0</strong>
+                            </div>
+
+                            <div class="status-summary-item">
+                                <span class="status-dot rejected-dot"></span>
+                                <span>Rejected</span>
+                                <strong id="rejectedCount">0</strong>
+                            </div>
+
+                            <div class="status-summary-item">
+                                <span class="status-dot settled-dot"></span>
+                                <span>Settled</span>
+                                <strong id="settledCount">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel recent-claims-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Recent Claims</h3>
+                            <p>Latest submitted insurance claims</p>
+                        </div>
+                        <button class="text-button" data-go="claims">View All</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Claimant</th>
+                                    <th>Claim Type</th>
+                                    <th>Amount</th>
+                                    <th>Filed Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentClaimsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Claim Filing -->
+            <section class="page-section" id="file-claim">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>File a New Claim</h2>
+                        <p>Complete the following steps to submit an insurance claim.</p>
+                    </div>
+                </div>
+
+                <div class="panel filing-panel">
+
+                    <div class="step-indicator">
+                        <div class="step active" data-step-indicator="1">
+                            <span>1</span>
+                            <p>Policy Details</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step-indicator="2">
+                            <span>2</span>
+                            <p>Incident Details</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step-indicator="3">
+                            <span>3</span>
+                            <p>Documents</p>
+                        </div>
+                    </div>
+
+                    <form id="claimForm">
+
+                        <!-- Step 1 -->
+                        <div class="form-step active" data-form-step="1">
+                            <h3>Policy Information</h3>
+                            <p class="form-description">Enter the policyholder and insurance details.</p>
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label for="policyNumber">Policy Number *</label>
+                                    <input type="text" id="policyNumber" placeholder="e.g. POL-2026-001" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claimantName">Claimant Name *</label>
+                                    <input type="text" id="claimantName" placeholder="Enter full name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claimantEmail">Email Address *</label>
+                                    <input type="email" id="claimantEmail" placeholder="example@email.com" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claimantPhone">Phone Number *</label>
+                                    <input type="tel" id="claimantPhone" placeholder="Enter phone number" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claimType">Claim Type *</label>
+                                    <select id="claimType" required>
+                                        <option value="">Select claim type</option>
+                                        <option value="Health">Health Insurance</option>
+                                        <option value="Auto">Auto Insurance</option>
+                                        <option value="Life">Life Insurance</option>
+                                        <option value="Property">Property Insurance</option>
+                                        <option value="Travel">Travel Insurance</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claimAmount">Claim Amount (₹) *</label>
+                                    <input type="number" id="claimAmount" min="1" placeholder="Enter amount" required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="primary-button" id="stepOneNext">
+                                    Continue <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="form-step" data-form-step="2">
+                            <h3>Incident Information</h3>
+                            <p class="form-description">Provide details about the incident related to your claim.</p>
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label for="incidentDate">Incident Date *</label>
+                                    <input type="date" id="incidentDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="filedDate">Claim Filing Date *</label>
+                                    <input type="date" id="filedDate" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="incidentLocation">Incident Location</label>
+                                    <input type="text" id="incidentLocation" placeholder="Enter incident location">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="claimDescription">Incident Description *</label>
+                                    <textarea id="claimDescription" rows="5" placeholder="Describe what happened..." required></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="secondary-button" id="stepTwoBack">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" class="primary-button" id="stepTwoNext">
+                                    Continue <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="form-step" data-form-step="3">
+                            <h3>Supporting Documents</h3>
+                            <p class="form-description">Upload relevant documents for claim verification.</p>
+
+                            <div class="upload-area">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <h4>Upload Claim Documents</h4>
+                                <p>Choose files such as bills, receipts, reports or photographs.</p>
+                                <input type="file" id="claimDocuments" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">
+                                <label for="claimDocuments" class="secondary-button">
+                                    Browse Files
+                                </label>
+                                <div id="selectedFiles" class="selected-files"></div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="secondary-button" id="stepThreeBack">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" class="primary-button">
+                                    <i class="fa-solid fa-paper-plane"></i> Submit Claim
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+
+            <!-- Claim List -->
+            <section class="page-section" id="claims">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>All Claims</h2>
+                        <p>Search, filter and manage insurance claims.</p>
+                    </div>
+
+                    <button class="primary-button" data-go="file-claim">
+                        <i class="fa-solid fa-plus"></i> New Claim
+                    </button>
+                </div>
+
+                <div class="panel">
+
+                    <div class="filter-toolbar">
+
+                        <div class="search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="search" id="claimSearch" placeholder="Search by claim ID, name or policy...">
+                        </div>
+
+                        <select id="statusFilter" aria-label="Filter by status">
+                            <option value="">All Statuses</option>
+                            <option value="filed">Filed</option>
+                            <option value="under-review">Under Review</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="settled">Settled</option>
+                        </select>
+
+                        <select id="typeFilter" aria-label="Filter by claim type">
+                            <option value="">All Types</option>
+                            <option value="Health">Health</option>
+                            <option value="Auto">Auto</option>
+                            <option value="Life">Life</option>
+                            <option value="Property">Property</option>
+                            <option value="Travel">Travel</option>
+                        </select>
+
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Claimant</th>
+                                    <th>Policy Number</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Filed Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="claimsTable"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-footer">
+                        <span id="claimsCount">Showing 0 claims</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Claim Detail -->
+            <section class="page-section" id="claim-detail">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Claim Details</h2>
+                        <p>View complete information and processing history.</p>
+                    </div>
+
+                    <button class="secondary-button" data-go="claims">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Claims
+                    </button>
+                </div>
+
+                <div id="claimDetailContent" class="detail-content">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-file-circle-question"></i>
+                        <h3>No Claim Selected</h3>
+                        <p>Select a claim from the claims list to view its details.</p>
+                        <button class="primary-button" data-go="claims">View Claims</button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Claim Review -->
+            <section class="page-section" id="review">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Claim Review & Approval</h2>
+                        <p>Review submitted claims and make processing decisions.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Claims Awaiting Review</h3>
+                            <p>Verify the submitted information before taking action.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Claimant</th>
+                                    <th>Claim Type</th>
+                                    <th>Amount</th>
+                                    <th>Filed Date</th>
+                                    <th>Status</th>
+                                    <th>Review</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reviewTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel review-form-panel" id="reviewFormPanel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Review Decision</h3>
+                            <p>Record your review comments and decision.</p>
+                        </div>
+                    </div>
+
+                    <form id="reviewForm">
+                        <input type="hidden" id="reviewClaimId">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="reviewerName">Reviewer Name *</label>
+                                <input type="text" id="reviewerName" placeholder="Enter reviewer name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reviewDecision">Decision *</label>
+                                <select id="reviewDecision" required>
+                                    <option value="">Select decision</option>
+                                    <option value="under-review">Under Review</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approve</option>
+                                    <option value="rejected">Reject</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="reviewComments">Comments / Reason *</label>
+                                <textarea id="reviewComments" rows="4" placeholder="Enter review comments..." required></textarea>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="primary-button">
+                            <i class="fa-solid fa-check"></i> Save Review
+                        </button>
+                    </form>
+                </div>
+
+            </section>
+
+            <!-- Settlement -->
+            <section class="page-section" id="settlement">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Settlement Processing</h2>
+                        <p>Manage approved claims and track payment status.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid settlement-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h2 id="settlementCompleted">0</h2>
+                        <p>Completed Settlements</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                        <h2 id="settlementPending">0</h2>
+                        <p>Pending Payments</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <h2 id="settlementAmount">₹0</h2>
+                        <p>Total Paid</p>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Settlement Records</h3>
+                            <p>Approved claims available for settlement.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Claimant</th>
+                                    <th>Approved Amount</th>
+                                    <th>Payment Date</th>
+                                    <th>Payment Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="settlementTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel settlement-form-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Process Settlement</h3>
+                            <p>Enter settlement and payment information.</p>
+                        </div>
+                    </div>
+
+                    <form id="settlementForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="settlementClaimId">Claim ID *</label>
+                                <select id="settlementClaimId" required>
+                                    <option value="">Select approved claim</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settlementAmountInput">Settlement Amount (₹) *</label>
+                                <input type="number" id="settlementAmountInput" min="1" placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paymentDate">Payment Date *</label>
+                                <input type="date" id="paymentDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paymentStatus">Payment Status *</label>
+                                <select id="paymentStatus" required>
+                                    <option value="">Select payment status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="settlementNotes">Settlement Notes</label>
+                                <textarea id="settlementNotes" rows="3" placeholder="Add settlement notes..."></textarea>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="primary-button">
+                            <i class="fa-solid fa-money-bill-transfer"></i> Save Settlement
+                        </button>
+
+                    </form>
+                </div>
+
+            </section>
+
+            <!-- Documents -->
+            <section class="page-section" id="documents">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Document Management</h2>
+                        <p>Upload, preview and manage claim-related documents.</p>
+                    </div>
+                </div>
+
+                <div class="panel document-upload-panel">
+                    <div class="upload-area">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <h3>Upload Documents</h3>
+                        <p>Select supporting files and associate them with a claim.</p>
+
+                        <div class="form-group">
+                            <label for="documentClaimId">Associated Claim</label>
+                            <select id="documentClaimId">
+                                <option value="">Select claim</option>
+                            </select>
+                        </div>
+
+                        <input type="file" id="documentUpload" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">
+                        <label for="documentUpload" class="secondary-button">
+                            <i class="fa-solid fa-upload"></i> Choose Documents
+                        </label>
+
+                        <div id="documentUploadList" class="selected-files"></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Uploaded Documents</h3>
+                            <p>All available claim documents.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>Claim ID</th>
+                                    <th>File Type</th>
+                                    <th>Upload Date</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="documentsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Reports -->
+            <section class="page-section" id="reports">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Reports & Analytics</h2>
+                        <p>Analyze claim activity and settlement performance.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                        <h2 id="reportTotalClaims">0</h2>
+                        <p>Total Claims</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                        <h2 id="reportApprovalRate">0%</h2>
+                        <p>Approval Rate</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <h2 id="reportTotalAmount">₹0</h2>
+                        <p>Total Claim Amount</p>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-grid">
+
+                    <div class="panel chart-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Claims by Type</h3>
+                                <p>Distribution across insurance categories.</p>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="typeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="panel chart-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Settlement Analytics</h3>
+                                <p>Settlement payment overview.</p>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="settlementChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Export Reports</h3>
+                            <p>Download claim and settlement information.</p>
+                        </div>
+                    </div>
+
+                    <div class="export-actions">
+                        <button class="primary-button" id="exportCSV">
+                            <i class="fa-solid fa-file-csv"></i> Export Claims CSV
+                        </button>
+
+                        <button class="secondary-button" id="exportPDF">
+                            <i class="fa-solid fa-file-pdf"></i> Export PDF
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Profile -->
+            <section class="page-section" id="profile">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>My Profile</h2>
+                        <p>View your account information.</p>
+                    </div>
+                </div>
+
+                <div class="panel profile-panel">
+                    <div class="profile-avatar" id="profileAvatar">AD</div>
+                    <h2 id="profileName">Admin User</h2>
+                    <p id="profileEmail">admin@claimpro.com</p>
+
+                    <div class="profile-details">
+                        <div>
+                            <span>Account Role</span>
+                            <strong id="profileRole">Administrator</strong>
+                        </div>
+                        <div>
+                            <span>Account Status</span>
+                            <strong class="text-success">Active</strong>
+                        </div>
+                    </div>
+
+                    <button class="secondary-button" id="profileLogout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Login -->
+            <section class="page-section auth-section" id="login">
+
+                <div class="auth-card panel">
+                    <div class="auth-logo">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+
+                    <h2>Welcome Back</h2>
+                    <p>Login to your ClaimPro account.</p>
+
+                    <form id="loginForm">
+
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+
+                        <button type="submit" class="primary-button full-button">
+                            Login <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </form>
+
+                    <p class="auth-switch">
+                        Don't have an account?
+                        <button type="button" class="text-button" data-go="register">Register</button>
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- Register -->
+            <section class="page-section auth-section" id="register">
+
+                <div class="auth-card panel">
+                    <div class="auth-logo">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <h2>Create Account</h2>
+                    <p>Register to use the ClaimPro platform.</p>
+
+                    <form id="registerForm">
+
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" placeholder="Create a password" required>
+                        </div>
+
+                        <button type="submit" class="primary-button full-button">
+                            Create Account <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </form>
+
+                    <p class="auth-switch">
+                        Already have an account?
+                        <button type="button" class="text-button" data-go="login">Login</button>
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>© <span id="currentYear"></span> ClaimPro. Insurance Claim Processing System.</p>
+            <span>Designed for efficient claim management</span>
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- External Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<!-- Project JavaScript -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
