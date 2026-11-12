@@ -2,9 +2,13 @@
 # CLAIMPRO – CLAIM PROCESSING SYSTEM
 
 Project Title: Insurance Claim Processing System
+
 Project Type: Front-End Web Development Project
+
 Technologies: HTML5, CSS3, JavaScript
+
 Deployment Platform: Vercel
+
 Source Code: https://github.com/tbharati876/Insurance-Claim-Processing-System-ClaimPro
 
 Live Website: https://insurance-claimpro.vercel.app/
